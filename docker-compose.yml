@@ -1,0 +1,7 @@
+services:
+  my-ocr:
+    image: fastapi-ocr 
+    container_name: my-ocr 
+    ports:
+      - "8080:7000"  
+    restart: unless-stopped 

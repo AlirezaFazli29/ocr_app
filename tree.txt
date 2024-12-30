@@ -1,0 +1,10 @@
+ocr-service/
+├── app/
+│   ├── __init__.py
+│   ├── main.py
+│   ├── utils.py
+│   └── requirements.txt
+├── Dockerfile
+├── docker-compose.yml
+├── requirements.txt
+└── README.md

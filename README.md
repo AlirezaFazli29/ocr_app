@@ -1,1 +1,1 @@
-Project initialized 
+Project Initialized 

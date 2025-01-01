@@ -47,16 +47,16 @@ This should show the list of available languages, including the ones you've inst
 
 First, make sure Docker is installed on your machine. You can download it from the official Docker website.
 
-Build the Docker image using the provided Dockerfile:
+Now you can get the image with this line:
 
 ```bash
-docker build -t fastapi-ocr .
+docker pull alirezafazli29/fastapi-ocr
 ```
 
-After building the image, you can run the app inside a Docker container. The app will be accessible on port 7000 by default:
+After downloading the image, you can run the app inside a Docker container. The app will be accessible on port 7000 by default:
 
 ```bash
-docker run -p 8080:7000 --name my-ocr fastapi-ocr
+docker run -p 8080:7000 --name my-ocr alirezafazli29/fastapi-ocr
 ```
 
 This will start the FastAPI app, and you can access it by navigating to http://localhost:8080 in your browser or using any HTTP client.

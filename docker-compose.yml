@@ -1,6 +1,6 @@
 services:
   my-ocr:
-    image: fastapi-ocr 
+    image: alirezafazli29/fastapi-ocr:0.0.2
     container_name: my-ocr 
     ports:
       - "8080:7000"  

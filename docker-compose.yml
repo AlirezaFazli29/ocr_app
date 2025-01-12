@@ -1,7 +1,7 @@
 services:
   my-ocr:
-    image: alirezafazli29/fastapi-ocr:0.0.2
+    image: alirezafazli29/fastapi-ocr:0.0.3
     container_name: my-ocr 
     ports:
-      - "8080:7000"  
+      - "8002:7000"  
     restart: unless-stopped 

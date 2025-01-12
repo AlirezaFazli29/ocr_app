@@ -3,7 +3,7 @@ from fastapi.responses import JSONResponse
 import pytesseract
 from PIL import Image
 import io
-from utils import language
+from utils import language, OCRJsonRequest
 import base64
 import uvicorn
 
@@ -95,6 +95,39 @@ async def perform_ocr_base46(
     
     return JSONResponse(
         content={"language": language.name, "extracted_text": extracted_text}
+    )
+
+@app.post("/ocr_base64_json")
+async def perform_ocr_base64_json(request: OCRJsonRequest):
+    """
+    Perform OCR on a base64 encoded image (JSON Input).
+
+    This function handles the OCR process:
+    - Accepts a JSON payload with a base64 encoded image string and the language to be used for OCR.
+    - Decodes the base64 string into image data and converts it to a PIL image.
+    - It performs OCR using Tesseract and returns the extracted text in the specified language.
+    - If any error occurs during decoding, image processing, or OCR, it raises an 
+      appropriate HTTP exception with a message.
+
+    Args:
+        request (OCRJsonRequest): A JSON payload with the base64 string and language.
+
+    Returns:
+        JSONResponse: A JSON response with the extracted text and OCR language.
+    """
+    try:
+        image_data = base64.b64decode(request.base64_string)
+        image = Image.open(io.BytesIO(image_data))
+    except Exception as e:
+        raise HTTPException(status_code=400, detail="Could not process the base64 string.")
+
+    try:
+        extracted_text = pytesseract.image_to_string(image, lang=request.language)
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"Error during OCR: {e}")
+
+    return JSONResponse(
+        content={"language": request.language, "extracted_text": extracted_text}
     )
 
 @app.post("/file-to-base64")

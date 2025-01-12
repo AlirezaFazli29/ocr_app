@@ -1,4 +1,5 @@
 from enum import Enum
+from pydantic import BaseModel
 
 
 class language(Enum):
@@ -8,3 +9,7 @@ class language(Enum):
     French = "fra"
     German = "deu"
     Farsi = "fas"
+
+class OCRJsonRequest(BaseModel):
+    base64_string: str
+    language: str
